@@ -1,3 +1,4 @@
+import hector.*
 import wollok.game.*
 object arriba {
 	method siguiente(position) {
@@ -26,7 +27,9 @@ object tablero {
 
 	method validarDentro(position) {
 		if (not self.estaDentro(position)) {
-			self.error("No puedo moverme fuera del tablero")
+			hector.error("No puedo moverme fuera del tablero")
+		}else{
+			return self.estaDentro(position)
 		}
 	}
 
