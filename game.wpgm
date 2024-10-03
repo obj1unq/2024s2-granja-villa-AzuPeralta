@@ -13,9 +13,6 @@ program farmville {
 
 	//  VISUALES
  	game.addVisual(hector)
- 	// game.addVisual(new Maiz()) // Se agrega a modo de prueba
-	// game.addVisual(new Trigo())
-	// game.addVisual(new Tomaco())
  	
 	//TECLADO 
 	keyboard.up().onPressDo({hector.mover(arriba)})
@@ -23,9 +20,11 @@ program farmville {
 	keyboard.down().onPressDo({hector.mover(abajo)})
 	keyboard.right().onPressDo({hector.mover(derecha)})
 
-	keyboard.m().onPressDo({hector.sembrar("maiz")})
-	keyboard.t().onPressDo({hector.sembrar("trigo")})
-	keyboard.o().onPressDo({hector.sembrar("tomaco")})
+	keyboard.m().onPressDo({hector.sembrarMaiz()})
+	keyboard.t().onPressDo({hector.sembrarTrigo()})
+	keyboard.o().onPressDo({hector.sembrarTomaco()})
+
+	keyboard.r().onPressDo({hector.regar()})
 
  	//  COMIENZA
 	game.start()
