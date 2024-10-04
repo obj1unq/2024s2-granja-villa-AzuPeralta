@@ -3,12 +3,10 @@ import wollok.game.*
 import posiciones.*
 import hector.*
 
-
-
 class Maiz {
 	var property position = game.at(1, 1)
 	var property image = "corn_baby.png"
-
+	
 	method regar() {
 		image = "corn_adult.png"
 	}
@@ -38,10 +36,14 @@ class Tomaco {
 	
 	method regar() {
 		const nuevaPos = position.up(1)
-		//ME FALTA LIMITAR QUE SI HAY UNA PLANTA ARRIBA NO PASE NADA, como hago??
-		tablero.validarDentro(nuevaPos)
+		self.puedoMoverme(nuevaPos)
 		position = nuevaPos
 		
 		image = "tomaco.png"
+	}
+	
+	method puedoMoverme(posicion) {
+		tablero.validarDentro(posicion)
+		granja.validarSiHayPlanta(posicion)
 	}
 }

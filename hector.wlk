@@ -9,21 +9,21 @@ object hector {
 	
 	method sembrarTrigo() {
 		const nuevaSiembra = new Trigo(position = self.position())
-		granja.validarSiembra()
+		granja.validarSiHayPlanta(position)
 		game.addVisual(nuevaSiembra)
 		granja.sembrados().add(nuevaSiembra)
 	}
 	
 	method sembrarMaiz() {
 		const nuevaSiembra = new Maiz(position = self.position())
-		granja.validarSiembra()
+		granja.validarSiHayPlanta(position)
 		game.addVisual(nuevaSiembra)
 		granja.sembrados().add(nuevaSiembra)
 	}
 	
 	method sembrarTomaco() {
 		const nuevaSiembra = new Tomaco(position = self.position())
-		granja.validarSiembra()
+		granja.validarSiHayPlanta(position)
 		game.addVisual(nuevaSiembra)
 		granja.sembrados().add(nuevaSiembra)
 	}
