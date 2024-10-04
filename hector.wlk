@@ -6,6 +6,7 @@ import granja.*
 object hector {
 	var property position = game.center()
 	const property image = "player.png"
+	const property cosecha = #{}
 	
 	method sembrarTrigo() {
 		const nuevaSiembra = new Trigo(position = self.position())
@@ -32,6 +33,14 @@ object hector {
 		const cultivoEnPos = game.colliders(self)
 		if (cultivoEnPos.isEmpty()) self.error("No tengo nada para regar!")
 		else cultivoEnPos.forEach({ planta => planta.regar() })
+	}
+	
+	method cosechar() {
+		//FALTA VALIDAR COSECHA SI ES ADULTA Y TIRAR EXCEPCION 
+		const cultivoEnPos = game.colliders(self)
+		
+		granja.hayPlantaEn(position)
+		cosecha.add(cultivoEnPos)
 	}
 	
 	method mover(direccion) {

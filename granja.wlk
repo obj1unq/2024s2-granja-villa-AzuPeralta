@@ -8,7 +8,7 @@ object granja {
   
   method validarSiHayPlanta(posicion) {
     if (self.hayPlantaEn(posicion)) hector.error(
-        "Ya hay un cultivo en esta parcela!"
+        "Hay un cultivo en esta parcela!"
       )
   }
   method hayPlantaEn(posicion) {

@@ -32,14 +32,12 @@ class Trigo {
 
 class Tomaco {
 	var property position = game.at(2, 3)
-	var property image = "tomaco_baby.png"
+	var property image = "tomaco.png"
 	
 	method regar() {
 		const nuevaPos = position.up(1)
 		self.puedoMoverme(nuevaPos)
 		position = nuevaPos
-		
-		image = "tomaco.png"
 	}
 	
 	method puedoMoverme(posicion) {
