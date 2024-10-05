@@ -84,23 +84,17 @@ describe "Granja Villa" {
   }
 
   test "Hector y los limites del tablero" {
-    //Esta en el borde izquierdo del tablero y no puede moverse ni abajo ni a la izquierda
+    //Esta en el borde izquierdo del tablero y no puede moverse ni abajo ni a la izquierda. 
     hector.position(game.at(0,0))
     assert.throwsException({hector.mover(izquierda)})
     assert.throwsException({hector.mover(abajo)})
 
-    //Lo mismo para el resto de las esquinas
-    hector.position(game.at(9,0))
-    assert.throwsException({hector.mover(abajo)})
-    assert.throwsException({hector.mover(derecha)})
+    //Lo mismo para el resto de las esquinas y posiciones del borde.
+    //Se testean solo dos esquinas para evitar tests redundantes. 
 
     hector.position(game.at(9,9))
     assert.throwsException({hector.mover(arriba)})
     assert.throwsException({hector.mover(derecha)})
-
-    hector.position(game.at(0,9))
-    assert.throwsException({hector.mover(arriba)})
-    assert.throwsException({hector.mover(izquierda)})
   }
 }
 

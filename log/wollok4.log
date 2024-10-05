@@ -4837,3 +4837,4 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":229,"timestamp":"2024-10-05T04:15:10.550Z"}
 {"level":"info","message":"⌛ Validating testGranja.wtest","timeElapsed":236,"timestamp":"2024-10-05T04:15:10.788Z"}
 {"level":"info","message":"⌛ Validating testGranja.wtest","timeElapsed":245,"timestamp":"2024-10-05T04:15:11.034Z"}
+{"failures":[],"level":"info","message":"🧪 Test runner executed on c:\\Users\\Azu\\OneDrive\\Documentos\\UNQUI\\ProgramacionConObjetosI\\Repositorio\\2024s2-granja-villa-AzuPeralta","result":{"failed":0,"ok":4},"timeElapsed":1704,"timestamp":"2024-10-05T04:17:02.874Z"}
