@@ -1,9 +1,101 @@
-import example.pepita
+import wollok.game.*
+import hector.*
+import cultivos.*
+import granja.*
+import posiciones.*
 
-describe "group of tests for pepita" {
+describe "Granja Villa" {
+  test "Hector siembra Maiz" {
+    //La granja y la cosecha de Hector estan vacias
+    assert.that(granja.sembrados().isEmpty())
+    assert.that(hector.cosecha().isEmpty())
+    
+    hector.sembrarMaiz() 
+    
+    //No puede cosechar porque la planta es bebe.
+    assert.throwsException({ hector.cosechar() })
+    hector.regar()
+    hector.cosechar() 
+    
+    //Despues de cosechar, la granja vuelve a estar vacia    
+    //y hector agrega a su cosecha. 
+    assert.notThat(hector.cosecha().isEmpty())
+    assert.that(granja.sembrados().isEmpty()) 
+    
+    //Hector vende su cosecha   
+    hector.vender()
+    assert.equals(150, hector.oro())
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+    //Granja y cosecha quedan vacias
+    assert.that(granja.sembrados().isEmpty())
+    assert.that(hector.cosecha().isEmpty())
+    
+  }
+  
+  test "Hector siembra Trigo" {
+    //Hector inicia en el centro del tablero
+    assert.equals(game.center(), hector.position())
+    
+    hector.position(game.at(0, 0))
+    hector.sembrarTrigo()
+
+    //Tira una excepcion porque ya hay una planta en esa posicion
+    assert.throwsException({ hector.sembrarTrigo() })
+    hector.regar() 
+    
+    //Quiere cosechar, pero todavia no se puede 
+    assert.throwsException({ hector.cosechar() })
+    hector.regar()
+    //Ahora si la puede cosechar!
+    assert.that(granja.cultivoEnLaPosicion(hector.position()).esAdulta())
+    hector.cosechar() 
+    
+    //Se mueve una posicion a la derecha y puede sembrar
+    hector.mover(derecha)
+    assert.equals(game.at(1, 0), hector.position())
+    hector.sembrarTrigo()
+
+    //Corrobora que se sembro en la nueva posicion de hector
+    assert.that(granja.hayPlantaEn(hector.position())) 
+    //Riega hasta evolucion 3
+    hector.regar()
+    hector.regar()
+    hector.regar()
+    assert.equals(granja.cultivoEnLaPosicion(hector.position()).evolucion(), 3)
+    hector.regar()
+    //El estado de la evolucion vuelve a cero y no puede cosechar, tira excepcion
+    assert.throwsException({ hector.cosechar() })
+
+    //La granja tiene un cultivo, y Hector ahora tiene 1 planta para vender
+    assert.notThat(granja.sembrados().isEmpty())
+    assert.equals(hector.cosecha().count({planta => planta.esAdulta()}), 1)
   }
 
+  test "Hector vende Tomaco" {
+    hector.sembrarTomaco()
+    //El tomaco siempre es adulto y se puede cosechar
+    assert.that(granja.cultivoEnLaPosicion(hector.position()).esAdulta())
+    hector.regar()
+    //El tomaco cambia de posicion al regarse y ya no esta en la posicion de Hector
+    assert.notThat(granja.hayPlantaEn(hector.position()))
+    hector.mover(arriba)
+    hector.cosechar()
+    assert.notThat(hector.cosecha().isEmpty())
+  }
+
+  test "Hector y los limites del tablero" {
+    //Esta en el borde izquierdo del tablero y no puede moverse ni abajo ni a la izquierda. 
+    hector.position(game.at(0,0))
+    assert.throwsException({hector.mover(izquierda)})
+    assert.throwsException({hector.mover(abajo)})
+
+    //Lo mismo para el resto de las esquinas y posiciones del borde.
+    //Se testean solo dos esquinas para evitar tests redundantes. 
+
+    hector.position(game.at(9,9))
+    assert.throwsException({hector.mover(arriba)})
+    assert.throwsException({hector.mover(derecha)})
+  }
 }
+
+
