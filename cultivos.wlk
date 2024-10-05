@@ -6,9 +6,15 @@ import hector.*
 class Maiz {
 	var property position = game.at(1, 1)
 	var property image = "corn_baby.png"
+	var property esAdulta = false
 	
 	method regar() {
 		image = "corn_adult.png"
+		esAdulta = true
+	}
+
+	method precio() {
+	  return 150
 	}
 }
 
@@ -16,7 +22,7 @@ class Trigo {
 	var property position = game.at(9, 7)
 	var property image = ("wheat_" + evolucion) + ".png"
 	var property evolucion = 0
-	
+		
 	method regar() {
 		if (evolucion <= 2) {
 			image = ("wheat_" + (evolucion + 1)) + ".png"
@@ -27,6 +33,14 @@ class Trigo {
 				evolucion = 0
 			}
 		}
+	}
+
+	method esAdulta() {
+	  return evolucion >= 2
+	}
+
+	method precio() {
+	  return (evolucion - 1) * 100
 	}
 }
 
@@ -42,6 +56,14 @@ class Tomaco {
 	
 	method puedoMoverme(posicion) {
 		tablero.validarDentro(posicion)
-		granja.validarSiHayPlanta(posicion)
+		granja.validarParcela(posicion)
+	}
+
+	method esAdulta() {
+	  return true
+	}
+
+	method precio() {
+	  return 80
 	}
 }
